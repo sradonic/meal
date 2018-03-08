@@ -5,7 +5,8 @@ use Faker\Generator as Faker;
 
 $categories = Category::all()->pluck('id')->toArray();
 
-$factory->define(App\Domain\Meal::class, function (Faker $faker) use ($categories) {
+$factory->define(App\Domain\Meal::class, function (Faker $faker) use ($categories)
+{
     return [
         'title:en' => $faker->name,
         'description:en' => $faker->text($maxNbChars = 180),

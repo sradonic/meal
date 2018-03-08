@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Model\ResourceCheck;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class MealResource extends JsonResource
@@ -20,30 +21,18 @@ class MealResource extends JsonResource
             'description' => $this->description,
             'slug' => $this->slug,
             'status' => $this->status,
-            'category' => $this->when($this->categoriesExsist($request), new CategoryResource($this->category)),
-            'tags' => $this->when($this->TagsExsist($request), TagsResource::collection($this->tags)),
-            'ingredients' => $this->when($this->IngreditentsExsist($request), IngredientsResource::collection($this->ingredients)),
+            'category' => $this->when (
+                ResourceCheck::categoriesExists($request),
+                new CategoryResource($this->category)
+            ),
+            'tags' => $this->when (
+                ResourceCheck::tagsExists($request),
+                TagsResource::collection($this->tags)
+            ),
+            'ingredients' => $this->when (
+                ResourceCheck::ingredientsExists($request),
+                IngredientsResource::collection($this->ingredients)
+            ),
         ];
-    }
-
-    public function categoriesExsist($request) {
-        if(strpos($request->with , 'category') !== false) {
-            return true;
-        }
-        return false;
-    }
-
-    public function TagsExsist($request) {
-        if(strpos($request->with , 'tags') !== false) {
-            return true;
-        }
-        return false;
-    }
-
-    public function IngreditentsExsist($request) {
-        if(strpos($request->with , 'ingredients') !== false) {
-            return true;
-        }
-        return false;
     }
 }

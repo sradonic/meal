@@ -9,8 +9,6 @@ use Illuminate\Support\Facades\Input;
 
 class MealController extends Controller
 {
-
-
     /**
      * MealController constructor.
      */
@@ -21,7 +19,6 @@ class MealController extends Controller
 
     public function index(Request $request, $locale)
     {
-        $meals = $this->mealInterface->index($request, $locale);
-        return $meals;
+        return $this->mealInterface->index($request, $locale);
     }
 }

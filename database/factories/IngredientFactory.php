@@ -2,7 +2,8 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Domain\Ingredient::class, function (Faker $faker) {
+$factory->define(App\Domain\Ingredient::class, function (Faker $faker)
+{
     return [
         'title:en' => $faker->name,
         'title:de' => $faker->name,

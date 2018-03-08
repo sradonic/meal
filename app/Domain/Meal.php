@@ -2,6 +2,7 @@
 
 namespace App\Domain;
 
+use App\Model\Transformer;
 use Illuminate\Database\Eloquent\Model;
 use Dimsav\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Builder;
@@ -28,23 +29,18 @@ class Meal extends Model
         return $query->where('category_id', $name);
     }
 
-    public function scopeTaging (Builder $query, $name) {
-        if(strpos($name, ',') !== false) {
-            $new = str_split($name);
-        } else $new = explode(',', $name);
-        return $query->whereHas('tags', function ($q) use ($new) {
-            $q->whereIn('id', $new);
+    public function scopeTaging (Builder $query, $arg) {
+        $array = Transformer::transformForScope($arg);
+        return $query->whereHas('tags', function ($q) use ($array) {
+            $q->whereIn('id', $array);
         });
     }
 
-    public function scopeCategoriesTags (Builder $query, $name, $name2) {
-        if(strpos($name2, ',') !== false) {
-            $new = str_split($name2);
-        } else $new = explode(',', $name2);
-        dd($name2);
-        return $query->where('category_id', $name)->where(function($subQuery) use ($name2) {
-            $subQuery->whereHas('tags', function ($q) use ($name2) {
-                $q->whereIn('id', $name2);
+    public function scopeCategoriesTags (Builder $query, $arg, $arg1) {
+        $array = Transformer::transformForScope($arg1);
+        return $query->where('category_id', $arg)->where(function($subQuery) use ($array) {
+            $subQuery->whereHas('tags', function ($q) use ($array) {
+                $q->whereIn('id', $array);
             });
         });
     }
