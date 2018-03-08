@@ -14,7 +14,7 @@ class IngredientSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Domain\Ingredient::class, 2)->create();
+        factory(App\Domain\Ingredient::class, 20)->create();
         /*
         $faker = Faker::create();
 

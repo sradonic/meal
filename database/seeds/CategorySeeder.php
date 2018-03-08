@@ -1,5 +1,7 @@
 <?php
 
+use App\Domain\Category;
+use App\Domain\Meal;
 use Illuminate\Database\Seeder;
 
 class CategorySeeder extends Seeder
@@ -11,6 +13,8 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Domain\Category::class, 2)->create();
+        factory(Category::class, 20)->create()->each(function ($data) {
+            $data->meal()->saveMany(factory(Meal::class, 20)->make());
+        });
     }
 }

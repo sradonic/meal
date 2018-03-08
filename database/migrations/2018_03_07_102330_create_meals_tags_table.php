@@ -13,7 +13,7 @@ class CreateMealsTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('meals_tags', function (Blueprint $table) {
+        Schema::create('meal_tag', function (Blueprint $table) {
             $table->integer('meal_id')->unsigned()->nullable();
             $table->foreign('meal_id')->references('id')
                 ->on('meals')->onDelete('cascade');
@@ -31,6 +31,6 @@ class CreateMealsTagsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('meals_tags');
+        Schema::dropIfExists('meal_tag');
     }
 }

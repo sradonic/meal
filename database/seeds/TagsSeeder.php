@@ -14,7 +14,7 @@ class TagsSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Domain\Tag::class, 2)->create();
+        factory(App\Domain\Tag::class, 20)->create();
         /*
         $faker = Faker::create();
 
