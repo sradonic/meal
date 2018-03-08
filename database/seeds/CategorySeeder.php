@@ -14,7 +14,7 @@ class CategorySeeder extends Seeder
     public function run()
     {
         factory(Category::class, 20)->create()->each(function ($data) {
-            $data->meal()->saveMany(factory(Meal::class, 20)->make());
+            $data->meal()->saveMany(factory(Meal::class, 2)->make());
         });
     }
 }
