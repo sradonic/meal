@@ -3,16 +3,28 @@
 
 namespace App\Model;
 
+use App\Contracts\MealTransformer;
 use App\Services\Impl\DispatcherFactory;
 use Illuminate\Http\Request;
-use App\Domain\Meal;
 
 class Dispatcher
 {
-    public static function apply(Request $filters)
+    protected $transformer;
+    protected $dispatcherFactory;
+
+    /**
+     * Dispatcher constructor.
+     */
+    public function __construct(MealTransformer $transformer, DispatcherFactory $dispatcherFactory)
     {
-        $dispatcherFactory = new DispatcherFactory();
-        $meals = $dispatcherFactory->filter($filters);
-        return response()->api($meals);
+        $this->transformer = $transformer;
+        $this->dispatcherFactory = $dispatcherFactory;
+    }
+
+    public function apply(Request $filters)
+    {
+        $meals = $this->dispatcherFactory->filter($filters);
+        $meals = $this->transformer->transform($meals);
+        return response()->json($meals);
     }
 }

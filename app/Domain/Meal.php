@@ -2,14 +2,14 @@
 
 namespace App\Domain;
 
-use App\Model\Transformer;
 use Illuminate\Database\Eloquent\Model;
 use Dimsav\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Meal extends Model
 {
-    use Translatable;
+    use Translatable, SoftDeletes;
 
     public $translatedAttributes = ['title', 'description'];
 
@@ -30,18 +30,23 @@ class Meal extends Model
     }
 
     public function scopeTaging (Builder $query, $arg) {
-        $array = Transformer::transformForScope($arg);
+        $array = explode('AND', $arg);
         return $query->whereHas('tags', function ($q) use ($array) {
             $q->whereIn('id', $array);
         });
     }
 
     public function scopeCategoriesTags (Builder $query, $arg, $arg1) {
-        $array = Transformer::transformForScope($arg1);
+        $array = explode('AND', $arg1);
         return $query->where('category_id', $arg)->where(function($subQuery) use ($array) {
             $subQuery->whereHas('tags', function ($q) use ($array) {
                 $q->whereIn('id', $array);
             });
         });
+    }
+
+    public function scopeGetByDate(Builder $query, $arg) {
+        return $query->withTrashed()
+            ->where('updated_at', '>', $arg);
     }
 }

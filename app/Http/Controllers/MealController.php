@@ -19,6 +19,10 @@ class MealController extends Controller
 
     public function index(Request $request, $locale)
     {
-        return $this->mealInterface->index($request, $locale);
+        app()->setLocale($locale);
+
+        $meals = $this->mealInterface->index($request);
+
+        return $this->respondWithPagination($meals);
     }
 }

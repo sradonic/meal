@@ -6,32 +6,38 @@ use App\Services\DispatcherInterface;
 
 class DispatcherFactory implements DispatcherInterface
 {
-    public function filter($request)
+    public function __construct(
+        CategoryTagsMealFactory $ctmFactory,
+        TagsMealFactory $tmFactory,
+        CategoryMealFactory $cmFactory,
+        BasicMealFactory $bmFactory
+    )
     {
-        if ($request->has('category'))
+        $this->ctmFactory = $ctmFactory;
+        $this->tmFactory = $tmFactory;
+        $this->cmFactory = $cmFactory;
+        $this->bmFactory = $bmFactory;
+    }
+
+    public function filter($request) {
+
+        if($request->has('tags') && $request->has('category')) {
+            $meals = $this->ctmFactory->sendRequest($request);
+        }
+
+        if($request->has('tags') && !$request->has('category')) {
+            $meals = $this->tmFactory->sendRequest($request);
+        }
+
+        if($request->has('category') && !$request->has('tags'))
         {
-            if ($request->has('tags'))
-            {
-                $categoryTagsMealFactory = new CategoryTagsMealFactory();
-                $meals = $categoryTagsMealFactory->sendRequest($request);
-            }
-            $categoryMealFactory = new CategoryMealFactory();
-            $meals = $categoryMealFactory->sendRequest($request);
+            $meals = $this->cmFactory->sendRequest($request);
         }
 
-        if ($request->has('tags')) {
-            if ($request->has('category')) {
-                $categoryTagsMealFactory = new CategoryTagsMealFactory();
-                $meals = $categoryTagsMealFactory->sendRequest($request);
-            }
-            $tagsMealFactory = new TagsMealFactory();
-            $meals = $tagsMealFactory->sendRequest($request);
+        if(!$request->has('tags') && !$request->has('category')) {
+            $meals = $this->bmFactory->sendRequest($request);
         }
 
-        else if(!$request->has('tags') && !$request->has('category')) {
-            $basicFactory = new BasicMealFactory();
-            $meals = $basicFactory->sendRequest($request);
-        }
         return $meals;
     }
 }
