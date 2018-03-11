@@ -15,7 +15,6 @@ class DbMealRepository implements MealInterface
 
     public function index($request)
     {
-
         if($request->has('with')) {
             $this->with($request->with);
         }

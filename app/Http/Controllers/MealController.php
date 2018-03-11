@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\Dispatcher;
 use App\Services\MealInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;

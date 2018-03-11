@@ -36,15 +36,6 @@ class Meal extends Model
         });
     }
 
-    public function scopeCategoriesTags (Builder $query, $arg, $arg1) {
-        $array = explode('AND', $arg1);
-        return $query->where('category_id', $arg)->where(function($subQuery) use ($array) {
-            $subQuery->whereHas('tags', function ($q) use ($array) {
-                $q->whereIn('id', $array);
-            });
-        });
-    }
-
     public function scopeGetByDate(Builder $query, $arg) {
         return $query->withTrashed()
             ->where('updated_at', '>', $arg);

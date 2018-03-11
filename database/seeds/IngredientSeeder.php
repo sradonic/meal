@@ -15,15 +15,5 @@ class IngredientSeeder extends Seeder
     public function run()
     {
         factory(App\Domain\Ingredient::class, 20)->create();
-        /*
-        $faker = Faker::create();
-
-        $meals = Meal::all()->pluck('id')->toArray();
-
-        Ingredient::create([
-            'title' => $faker->name,
-            'slug' => $faker->text($maxNbChars = 100),
-            'meal_id' => $faker->randomElement($meals),
-        ]);*/
     }
 }

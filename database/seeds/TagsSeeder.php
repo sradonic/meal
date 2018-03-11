@@ -15,17 +15,5 @@ class TagsSeeder extends Seeder
     public function run()
     {
         factory(App\Domain\Tag::class, 20)->create();
-        /*
-        $faker = Faker::create();
-
-        $meals = Meal::all()->pluck('id')->toArray();
-
-        Tag::create([
-            'title' => $faker->name,
-            'slug' => $faker->text($maxNbChars = 100),
-            'meal_id' => $faker->randomElement($meals),
-        ]);
-*/
-
     }
 }
