@@ -40,4 +40,8 @@ class Meal extends Model
         return $query->withTrashed()
             ->where('updated_at', '>', $arg);
     }
+    
+    public function scopeClean (Builder $query) {
+        $query->where('status', 'created');
+    }
 }
