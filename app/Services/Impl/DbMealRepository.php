@@ -30,6 +30,10 @@ class DbMealRepository implements MealInterface
         if($request->has('diff_time')) {
             $this->diffTime($request->diff_time);
         }
+        
+        if(!$request->has('diff_time')) {
+            $this->meal = $this->meal->clean();
+        }
 
         return $this->meal
             ->paginate($request->input('per_page', 10))
