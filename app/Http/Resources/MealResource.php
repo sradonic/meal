@@ -10,7 +10,7 @@ class MealResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return array
      */
     public function toArray($request)
@@ -21,18 +21,9 @@ class MealResource extends JsonResource
             'description' => $this->description,
             'slug' => $this->slug,
             'status' => $this->status,
-            'category' => $this->when (
-                ResourceCheck::categoriesExists($request),
-                new CategoryResource($this->category)
-            ),
-            'tags' => $this->when (
-                ResourceCheck::tagsExists($request),
-                TagsResource::collection($this->tags)
-            ),
-            'ingredients' => $this->when (
-                ResourceCheck::ingredientsExists($request),
-                IngredientsResource::collection($this->ingredients)
-            ),
+            'category' => $this->when(ResourceCheck::categoriesExists($request), new CategoryResource($this->category)),
+            'tags' => $this->when(ResourceCheck::tagsExists($request), TagsResource::collection($this->tags)),
+            'ingredients' => $this->when(ResourceCheck::ingredientsExists($request), IngredientsResource::collection($this->ingredients)),
         ];
     }
 }

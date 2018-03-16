@@ -15,12 +15,10 @@ class CreateMealIngredientTable extends Migration
     {
         Schema::create('meal_ingredient', function (Blueprint $table) {
             $table->integer('meal_id')->unsigned()->nullable();
-            $table->foreign('meal_id')->references('id')
-                ->on('meals')->onDelete('cascade');
+            $table->foreign('meal_id')->references('id')->on('meals')->onDelete('cascade');
 
             $table->integer('ingredient_id')->unsigned()->nullable();
-            $table->foreign('ingredient_id')->references('id')
-                ->on('ingredients')->onDelete('cascade');
+            $table->foreign('ingredient_id')->references('id')->on('ingredients')->onDelete('cascade');
         });
     }
 

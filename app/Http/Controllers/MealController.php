@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\GetMealValidator;
 use App\Services\MealInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -16,12 +17,12 @@ class MealController extends Controller
         $this->mealInterface = $mealInterface;
     }
 
-    public function index(Request $request, $locale)
+    public function index(GetMealValidator $request, $locale)
     {
         app()->setLocale($locale);
 
         $meals = $this->mealInterface->index($request);
 
-        return $this->respondWithPagination($meals);
+        return $this->transformWithPagination($meals);
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
-use App\Domain\Meal;
-use App\Domain\Tag;
+use App\Model\Meal;
+use App\Model\Tag;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 use Illuminate\Support\Facades\DB;
@@ -23,10 +23,8 @@ class MealTagSeeder extends Seeder
         for ($i = 1; $i <= 10; $i++) {
             DB::table('meal_tag')->insert([
                 'meal_id' => $faker->unique()->randomElement($mealIds),
-                'tag_id' => $faker->randomElement($tagIds)
+                'tag_id' => $faker->randomElement($tagIds),
             ]);
-
-
         }
     }
 }

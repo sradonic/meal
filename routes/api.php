@@ -17,4 +17,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/meals/{lang}', 'MealController@index')->middleware('lang');
+Route::get('/meals/{lang}', 'MealController@index');

@@ -12,6 +12,6 @@ class MealSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Domain\Meal::class, 2)->create();
+        factory(App\Model\Meal::class, 2)->create();
     }
 }

@@ -1,7 +1,6 @@
 <?php
 
-use App\Domain\Meal;
-use App\Domain\Tag;
+use App\Model\Tag;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 
@@ -14,6 +13,6 @@ class TagsSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Domain\Tag::class, 20)->create();
+        factory(App\Model\Tag::class, 20)->create();
     }
 }

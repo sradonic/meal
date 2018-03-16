@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Domain;
+namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CategoryTranslation extends Model
+class MealTranslation extends Model
 {
     public $timestamps = false;
 }

@@ -15,12 +15,10 @@ class CreateMealsTagsTable extends Migration
     {
         Schema::create('meal_tag', function (Blueprint $table) {
             $table->integer('meal_id')->unsigned()->nullable();
-            $table->foreign('meal_id')->references('id')
-                ->on('meals')->onDelete('cascade');
+            $table->foreign('meal_id')->references('id')->on('meals')->onDelete('cascade');
 
             $table->integer('tag_id')->unsigned()->nullable();
-            $table->foreign('tag_id')->references('id')
-                ->on('tags')->onDelete('cascade');
+            $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
         });
     }
 

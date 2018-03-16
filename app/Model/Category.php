@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain;
+namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Dimsav\Translatable\Translatable;
@@ -11,7 +11,8 @@ class Category extends Model
 
     public $translatedAttributes = ['title'];
 
-    public function meal() {
-        return $this->hasMany('App\Domain\Meal');
+    public function meal()
+    {
+        return $this->hasMany('App\Model\Meal');
     }
 }

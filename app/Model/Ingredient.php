@@ -1,17 +1,18 @@
 <?php
 
-namespace App\Domain;
+namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Dimsav\Translatable\Translatable;
 
-class Tag extends Model
+class Ingredient extends Model
 {
     use Translatable;
 
     public $translatedAttributes = ['title'];
 
-    public function meal() {
-        return $this->belongsToMany('App\Domain\Meal');
+    public function meal()
+    {
+        return $this->belongsToMany('App\Model\Meal', 'meal_ingredient');
     }
 }

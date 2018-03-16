@@ -23,7 +23,7 @@ class CreateMealsTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('meal_translations', function(Blueprint $table) {
+        Schema::create('meal_translations', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('meal_id')->unsigned();
             $table->string('locale')->index();

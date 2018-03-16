@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Domain;
+namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TagTranslation extends Model
+class CategoryTranslation extends Model
 {
     public $timestamps = false;
 }

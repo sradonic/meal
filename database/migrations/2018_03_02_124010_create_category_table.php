@@ -19,7 +19,7 @@ class CreateCategoryTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('category_translations', function(Blueprint $table) {
+        Schema::create('category_translations', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('category_id')->unsigned();
             $table->string('locale')->index();

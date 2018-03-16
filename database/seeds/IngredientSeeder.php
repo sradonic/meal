@@ -1,7 +1,6 @@
 <?php
 
-use App\Domain\Ingredient;
-use App\Domain\Meal;
+use App\Model\Ingredient;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 
@@ -14,6 +13,6 @@ class IngredientSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Domain\Ingredient::class, 20)->create();
+        factory(App\Model\Ingredient::class, 20)->create();
     }
 }
