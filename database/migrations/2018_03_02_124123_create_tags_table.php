@@ -38,7 +38,7 @@ class CreateTagsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tags');
         Schema::dropIfExists('tag_translations');
+        Schema::dropIfExists('tags');
     }
 }

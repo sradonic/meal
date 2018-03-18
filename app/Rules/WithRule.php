@@ -6,14 +6,16 @@ use Illuminate\Contracts\Validation\Rule;
 
 class WithRule implements Rule
 {
+    protected $allowed;
+
     /**
      * Create a new rule instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($allowed)
     {
-        //
+        $this->allowed = $allowed;
     }
 
     /**
@@ -25,12 +27,14 @@ class WithRule implements Rule
      */
     public function passes($attribute, $value)
     {
+        $valid = true;
         $array = explode(',', $value);
-        if (in_array('tags', $array) || in_array('category', $array) || in_array('ingredients', $array)) {
-            return true;
+
+        foreach($array as $arg) {
+            $valid = in_array($arg, $this->allowed);
         }
 
-        return false;
+        return $valid;
     }
 
     /**

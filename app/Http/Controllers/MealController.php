@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\MealResource;
 use App\Http\Requests\GetMealValidator;
 use App\Services\MealInterface;
 use Illuminate\Http\Request;
@@ -23,6 +24,6 @@ class MealController extends Controller
 
         $meals = $this->mealInterface->index($request);
 
-        return $this->transformWithPagination($meals);
+        return $this->transformWithPagination($meals, MealResource::class);
     }
 }

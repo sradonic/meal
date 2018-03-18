@@ -10,7 +10,6 @@ $factory->define(App\Model\Meal::class, function (Faker $faker) {
         'description:de' => $faker->text($maxNbChars = 180),
         'title:fr' => $faker->name,
         'description:fr' => $faker->text($maxNbChars = 180),
-        'status' => 'created',
         'slug' => $faker->text($maxNbChars = 60),
     ];
 });

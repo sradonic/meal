@@ -2,9 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\DiffTimeRule;
 use App\Rules\WithRule;
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
@@ -32,10 +30,10 @@ class GetMealValidator extends FormRequest
     public function rules()
     {
         return [
-            'with' => new WithRule(),
+            'with' => new WithRule(['tags', 'category', 'ingredients']),
             'category' => 'integer',
             'tags' => new TagRule(),
-            'diff_time' => new DiffTimeRule(),
+            'diff_time' => 'integer'
         ];
     }
 

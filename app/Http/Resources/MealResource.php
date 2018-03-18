@@ -20,7 +20,7 @@ class MealResource extends JsonResource
             'title' => $this->title,
             'description' => $this->description,
             'slug' => $this->slug,
-            'status' => $this->status,
+            'status' => $this->when($request->has('diff_time'), $this->status, 'created'),
             'category' => $this->when(ResourceCheck::categoriesExists($request), new CategoryResource($this->category)),
             'tags' => $this->when(ResourceCheck::tagsExists($request), TagsResource::collection($this->tags)),
             'ingredients' => $this->when(ResourceCheck::ingredientsExists($request), IngredientsResource::collection($this->ingredients)),

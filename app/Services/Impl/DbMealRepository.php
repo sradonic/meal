@@ -16,24 +16,20 @@ class DbMealRepository implements MealInterface
     public function index($request)
     {
 
-        if ($request->has('with')) {
+        if($request->has('with')) {
             $this->with($request->with);
         }
 
-        if ($request->has('category')) {
+        if($request->has('category')) {
             $this->category($request->category);
         }
 
-        if ($request->has('tags')) {
+        if($request->has('tags')) {
             $this->tags($request->tags);
         }
 
-        if ($request->has('diff_time')) {
+        if($request->has('diff_time')) {
             $this->diffTime($request->diff_time);
-        }
-
-        if (! $request->has('diff_time')) {
-            $this->meal = $this->meal->clean();
         }
 
         return $this->meal->paginate($request->input('per_page', 10))->appends($request->except('_token'));
@@ -46,10 +42,10 @@ class DbMealRepository implements MealInterface
 
     public function category($category)
     {
-        if ($category == "NULL") {
+        if($category == "NULL") {
             $this->meal = $this->meal->with('category')->hasCategory($category);
         } else {
-            if ($category == "!NULL") {
+            if($category == "!NULL") {
                 $this->meal = $this->meal->with('category')->doesntHaveCategory($category);
             } else {
                 $this->meal = $this->meal->with('category')->categoring($category);

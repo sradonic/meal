@@ -16,7 +16,7 @@ class CheckLanguage
     public function handle($request, Closure $next)
     {
         $languages = ['en', 'de', 'fr'];
-        if (in_array($request->lang, $languages) !== true) {
+        if(in_array($request->lang, $languages) !== true) {
             abort(400, "Language is not correnct!");
         }
 

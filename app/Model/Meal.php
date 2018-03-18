@@ -44,11 +44,21 @@ class Meal extends Model
 
     public function scopeGetByDate(Builder $query, $arg)
     {
-        return $query->withTrashed()->where('updated_at', '>', $arg);
+        return $query->withTrashed()->where('updated_at', '>', $arg)->orWhere('deleted_at', '>', $arg);
     }
 
-    public function scopeClean(Builder $query)
+    public function getStatusAttribute()
     {
-        $query->where('status', 'created')->whereColumn('updated_at', 'created_at');
+        $status = 'created';
+
+        if($this->deleted_at) {
+            $status = 'deleted';
+        }
+
+        if($this->updated_at->gt($this->created_at)) {
+            $status = 'modified';
+        }
+
+        return $status;
     }
 }

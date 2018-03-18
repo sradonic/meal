@@ -20,7 +20,7 @@ class MealIngredientSeeder extends Seeder
         $mealIds = Meal::pluck('id')->all();
         $ingredientIds = Ingredient::pluck('id')->all();
 
-        for ($i = 1; $i <= 10; $i++) {
+        for($i = 1; $i <= 10; $i++) {
             DB::table('meal_ingredient')->insert([
                 'meal_id' => $faker->unique()->randomElement($mealIds),
                 'ingredient_id' => $faker->randomElement($ingredientIds),

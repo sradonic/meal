@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\MealResource;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -12,8 +11,14 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function transformWithPagination($data)
+    public function transformWithPagination($data, $resource = false)
     {
+        if($resource) {
+            $collection = $resource::collection($data);
+        } else {
+            $collection = $data->getCollection();
+        }
+
         $customFormat = [
             'meta' => [
                 'total' => $data->total(),
@@ -21,7 +26,7 @@ class Controller extends BaseController
                 'per_page' => $data->perPage(),
                 'last_page' => $data->lastPage(),
             ],
-            'data' => MealResource::collection($data),
+            'data' => $collection,
             'paginator' => [
                 'previous_page' => $data->previousPageUrl(),
                 'current_page' => $data->url($data->currentPage()),

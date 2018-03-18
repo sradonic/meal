@@ -26,8 +26,9 @@ class TagRule implements Rule
     public function passes($attribute, $value)
     {
         $array = explode('AND', $value);
-        foreach ($array as $arg) {
-            if (! is_numeric($arg)) {
+
+        foreach($array as $arg) {
+            if(! is_numeric($arg)) {
                 return false;
             }
         }

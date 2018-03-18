@@ -6,7 +6,7 @@ class ResourceCheck
 {
     public static function categoriesExists($request)
     {
-        if (strpos($request->with, 'category') !== false) {
+        if(strpos($request->with, 'category') !== false) {
             return true;
         }
 
@@ -15,7 +15,7 @@ class ResourceCheck
 
     public static function tagsExists($request)
     {
-        if (strpos($request->with, 'tags') !== false) {
+        if(strpos($request->with, 'tags') !== false) {
             return true;
         }
 
@@ -24,7 +24,7 @@ class ResourceCheck
 
     public static function ingredientsExists($request)
     {
-        if (strpos($request->with, 'ingredients') !== false) {
+        if(strpos($request->with, 'ingredients') !== false) {
             return true;
         }
 
